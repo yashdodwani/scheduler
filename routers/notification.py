@@ -1,4 +1,3 @@
-# routers/notification.py
 from fastapi import APIRouter, Depends
 from services.email_service import send_email
 from services.telegram_service import send_telegram_message

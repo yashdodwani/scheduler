@@ -1,4 +1,3 @@
-# routers/events.py
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, BackgroundTasks
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, date

@@ -1,4 +1,3 @@
-# services/text_extraction.py
 from fastapi import HTTPException
 import pymupdf
 import docx

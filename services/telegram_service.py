@@ -1,4 +1,3 @@
-# services/telegram_service.py
 import requests
 from config import TELEGRAM_API_URL
 

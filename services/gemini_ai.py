@@ -1,4 +1,3 @@
-# services/gemini_ai.py
 from fastapi import HTTPException
 import google.generativeai as genai
 import json

@@ -1,4 +1,3 @@
-# routers/upload.py
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, BackgroundTasks
 from sqlalchemy.orm import Session
 from services.text_extraction import extract_text_from_pdf, extract_text_from_docx
