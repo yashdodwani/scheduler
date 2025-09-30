@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic[email]
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+python-telegram-bot
+requests
+pymupdf
+python-docx
+google-generativeai
+apscheduler
+pytz
+aiofiles
