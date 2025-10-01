@@ -8,7 +8,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 async def extract_events_with_gemini(text: str) -> List[dict]:
     try:
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('models/gemini-2.5-flash')
         prompt = f"""
         Extract all events, dates, and times from the following text. Return the result as a JSON array of objects with the following structure:
         [
@@ -43,4 +43,3 @@ async def extract_events_with_gemini(text: str) -> List[dict]:
             return events_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing with Gemini: {str(e)}")
-

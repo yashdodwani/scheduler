@@ -25,3 +25,10 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+class UserNotificationSettings(BaseModel):
+    notification_time: str  # Format: HH:MM (24-hour)
+    notify_one_day_before: bool
+
+class UserNotificationSettingsResponse(BaseModel):
+    notification_time: str
+    notify_one_day_before: bool

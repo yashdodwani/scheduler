@@ -12,6 +12,8 @@ class User(Base):
     telegram_user_id = Column(String, nullable=True)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+    notification_time = Column(String, default="08:00")  # Format: HH:MM (24-hour)
+    notify_one_day_before = Column(Boolean, default=False)
 
 class Event(Base):
     __tablename__ = "events"
@@ -23,4 +25,3 @@ class Event(Base):
     event_time = Column(String)
     source_file = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
-
