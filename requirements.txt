@@ -16,3 +16,4 @@ pytz
 aiofiles
 pyjwt
 psycopg2-binary
+sendgrid
