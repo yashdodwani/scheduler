@@ -8,7 +8,7 @@ import bcrypt
 from config import SECRET_KEY, ALGORITHM, SQLALCHEMY_DATABASE_URL
 from models.db_models import User
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 security = HTTPBearer()
 
@@ -44,29 +44,4 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
     return user
-# config.py
-import os
-
-# Security
-SECRET_KEY = "your-secret-key-here"  # Change this in production
-ALGORITHM = "HS256"
-
-# Email configuration
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USER = "yash.formskart@gmail.com"
-EMAIL_PASSWORD = "your-app-password"  # Use app password for Gmail
-
-# Gemini AI configuration
-GEMINI_API_KEY = "your-gemini-api-key"
-
-# Telegram Bot configuration
-TELEGRAM_BOT_TOKEN = "your-telegram-bot-token"
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
-
-# Database setup
-SQLALCHEMY_DATABASE_URL = "sqlite:///./schedule_app.db"
-
-# Timezone
-TIMEZONE = "Asia/Kolkata"
 

@@ -6,13 +6,8 @@ from config import TIMEZONE
 from models.db_models import User, Event
 from services.email_service import send_email
 from services.telegram_service import send_telegram_message
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-from config import SQLALCHEMY_DATABASE_URL
-from sqlalchemy.orm import sessionmaker
+from services.utils import SessionLocal
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 scheduler = BackgroundScheduler()
 
 def start_scheduler():
@@ -47,4 +42,3 @@ async def send_daily_notifications():
                     await send_telegram_message(user.telegram_user_id, telegram_message)
     finally:
         db.close()
-
