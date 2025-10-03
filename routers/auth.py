@@ -12,7 +12,21 @@ async def register(user: UserCreate, db: Session = Depends(get_database)):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     hashed_password = hash_password(user.password)
-    db_user = User(email=user.email, hashed_password=hashed_password)
+    if user.role == "company_admin":
+        if not user.company_name:
+            raise HTTPException(status_code=400, detail="Company name is required for company_admin registration")
+        # Check if company already exists
+        existing_company = db.query(models.db_models.Company).filter(models.db_models.Company.name == user.company_name).first()
+        if existing_company:
+            raise HTTPException(status_code=400, detail="Company name already registered")
+        # Create company
+        company = models.db_models.Company(name=user.company_name)
+        db.add(company)
+        db.commit()
+        db.refresh(company)
+        db_user = User(email=user.email, hashed_password=hashed_password, role="company_admin", company_id=company.id)
+    else:
+        db_user = User(email=user.email, hashed_password=hashed_password, role="person")
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -32,4 +46,3 @@ async def set_telegram_user_id(telegram_data: TelegramUserID, current_user: User
     current_user.telegram_user_id = telegram_data.telegram_user_id
     db.commit()
     return {"message": "Telegram user ID updated successfully"}
-

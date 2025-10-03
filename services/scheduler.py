@@ -3,7 +3,7 @@ from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime, timedelta, date, time as dt_time
 import pytz
 from config import TIMEZONE
-from models.db_models import User, Event
+from models.db_models import User, Event, CompanyContact
 from services.email_service import send_email
 from services.telegram_service import send_telegram_message
 from services.utils import SessionLocal
@@ -35,9 +35,17 @@ async def send_user_notifications(user, notify_date, db, is_one_day_before=False
             email_body += f"<li><strong>{event.title}</strong> at {event.event_time}<br><em>{event.description}</em></li>"
             telegram_message += f"🕒 <b>{event.title}</b> at {event.event_time}\n{event.description}\n\n"
         email_body += "</ul><p>Have a great day!</p><p><em>Schedule Management App</em></p></body></html>"
-        await send_email(user.email, email_subject, email_body)
-        if user.telegram_user_id:
-            await send_telegram_message(user.telegram_user_id, telegram_message)
+        if user.role == "company_admin" and user.company_id:
+            contacts = db.query(CompanyContact).filter(CompanyContact.company_id == user.company_id).all()
+            for contact in contacts:
+                if contact.email:
+                    await send_email(contact.email, email_subject, email_body)
+                if contact.telegram_user_id:
+                    await send_telegram_message(contact.telegram_user_id, telegram_message)
+        else:
+            await send_email(user.email, email_subject, email_body)
+            if user.telegram_user_id:
+                await send_telegram_message(user.telegram_user_id, telegram_message)
 
 async def notification_dispatcher():
     db = SessionLocal()

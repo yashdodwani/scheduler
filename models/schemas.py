@@ -5,6 +5,8 @@ from typing import List
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
+    role: str = "person"  # 'person', 'company_admin', 'company_member'
+    company_name: str = None  # Only for company_admin registration
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -32,3 +34,23 @@ class UserNotificationSettings(BaseModel):
 class UserNotificationSettingsResponse(BaseModel):
     notification_time: str
     notify_one_day_before: bool
+
+class UserRole(BaseModel):
+    role: str
+
+class CompanyCreate(BaseModel):
+    name: str
+
+class CompanyContactCreate(BaseModel):
+    email: EmailStr = None
+    telegram_user_id: str = None
+
+class CompanyContactResponse(BaseModel):
+    id: int
+    email: EmailStr = None
+    telegram_user_id: str = None
+
+class CompanyResponse(BaseModel):
+    id: int
+    name: str
+    contacts: list[CompanyContactResponse] = []
