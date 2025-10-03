@@ -39,6 +39,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/requirements.txt">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/requirements.txt" />
+              <option name="originalContent" value="fastapi&#10;uvicorn[standard]&#10;sqlalchemy&#10;pydantic[email]&#10;python-multipart&#10;python-jose[cryptography]&#10;passlib[bcrypt]&#10;bcrypt&#10;python-telegram-bot&#10;requests&#10;pymupdf&#10;python-docx&#10;google-generativeai&#10;apscheduler&#10;pytz&#10;aiofiles&#10;pyjwt&#10;psycopg2-binary&#10;sendgrid" />
+              <option name="updatedContent" value="fastapi&#10;uvicorn[standard]&#10;sqlalchemy&#10;pydantic[email]&#10;python-multipart&#10;python-jose[cryptography]&#10;passlib[bcrypt]&#10;bcrypt&#10;python-telegram-bot&#10;requests&#10;pymupdf&#10;python-docx&#10;google-generativeai&#10;apscheduler&#10;pytz&#10;aiofiles&#10;pyjwt&#10;psycopg2-binary&#10;sendgrid&#10;alembic" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/routers/auth.py">
           <value>
             <PendingDiffInfo>
