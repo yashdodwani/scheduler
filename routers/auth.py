@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from models.db_models import User
+from models.db_models import User,Company
 from models.schemas import UserCreate, UserLogin, Token, TelegramUserID
 from services.utils import hash_password, verify_password, create_access_token, get_current_user, get_database
 
@@ -16,11 +16,11 @@ async def register(user: UserCreate, db: Session = Depends(get_database)):
         if not user.company_name:
             raise HTTPException(status_code=400, detail="Company name is required for company_admin registration")
         # Check if company already exists
-        existing_company = db.query(models.db_models.Company).filter(models.db_models.Company.name == user.company_name).first()
+        existing_company = db.query(Company).filter(Company.name == user.company_name).first()
         if existing_company:
             raise HTTPException(status_code=400, detail="Company name already registered")
         # Create company
-        company = models.db_models.Company(name=user.company_name)
+        company = Company(name=user.company_name)
         db.add(company)
         db.commit()
         db.refresh(company)
