@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from models.db_models import Base
 from services.utils import engine
-from routers import auth, events, upload, notification, user
+from routers import auth, events, upload, notification, user, company
 from services.scheduler import start_scheduler
 from services.telegram_bot import ScheduleBotWebhook
 
@@ -25,7 +25,7 @@ app.include_router(auth.router)
 app.include_router(events.router)
 app.include_router(upload.router)
 app.include_router(notification.router)
-
+app.include_router(company.router)
 app.include_router(user.router)
 
 # Health check
