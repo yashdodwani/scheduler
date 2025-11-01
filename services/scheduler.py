@@ -42,6 +42,10 @@ async def send_user_notifications(user, notify_date, db, is_one_day_before=False
                     await send_email(contact.email, email_subject, email_body)
                 if contact.telegram_user_id:
                     await send_telegram_message(contact.telegram_user_id, telegram_message)
+            # Also notify the admin themselves
+            await send_email(user.email, email_subject, email_body)
+            if user.telegram_user_id:
+                await send_telegram_message(user.telegram_user_id, telegram_message)
         else:
             await send_email(user.email, email_subject, email_body)
             if user.telegram_user_id:

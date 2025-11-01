@@ -31,6 +31,17 @@ async def test_notification(
                     contact.telegram_user_id,
                     "🔔 <b>Test Notification</b>\n\nThis is a test notification from Schedule Management App.",
                 )
+        # Also notify the admin themselves
+        await send_email(
+            current_user.email,
+            "Test Notification",
+            "<h2>Test Email</h2><p>This is a test notification from Schedule Management App.</p>",
+        )
+        if current_user.telegram_user_id:
+            await send_telegram_message(
+                current_user.telegram_user_id,
+                "🔔 <b>Test Notification</b>\n\nThis is a test notification from Schedule Management App.",
+            )
     else:
         await send_email(
             current_user.email,
