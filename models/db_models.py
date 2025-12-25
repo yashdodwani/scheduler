@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from datetime import datetime
 
 Base = declarative_base()
 
+class User(Base):
 class Company(Base):
     __tablename__ = "companies"
     id = Column(Integer, primary_key=True, index=True)
@@ -21,26 +21,6 @@ class CompanyContact(Base):
     telegram_user_id = Column(String, nullable=True)
     company = relationship("Company", back_populates="contacts")
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
-    telegram_user_id = Column(String, nullable=True)
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    notification_time = Column(String, default="08:00")  # Format: HH:MM (24-hour)
-    notify_one_day_before = Column(Boolean, default=False)
-    role = Column(String, default="person")  # 'person', 'company_admin', 'company_member'
-    company_id = Column(Integer, ForeignKey("companies.id"), nullable=True)
-    company = relationship("Company", back_populates="users")
-
-class Event(Base):
-    __tablename__ = "events"
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, index=True)
-    title = Column(String)
-    description = Column(Text)
     event_date = Column(DateTime)
     event_time = Column(String)
     source_file = Column(String)

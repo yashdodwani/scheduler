@@ -42,6 +42,8 @@ class EventResponse(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    role: str
+    company_id: int | None = None
 
 
 class UserNotificationSettings(BaseModel):

@@ -31,7 +31,12 @@ async def register(user: UserCreate, db: Session = Depends(get_database)):
     db.commit()
     db.refresh(db_user)
     access_token = create_access_token(data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "role": db_user.role,
+        "company_id": db_user.company_id,
+    }
 
 @router.post("/login", response_model=Token)
 async def login(user: UserLogin, db: Session = Depends(get_database)):
@@ -39,7 +44,12 @@ async def login(user: UserLogin, db: Session = Depends(get_database)):
     if not db_user or not verify_password(user.password, db_user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     access_token = create_access_token(data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "role": db_user.role,
+        "company_id": db_user.company_id,
+    }
 
 @router.post("/telegram")
 async def set_telegram_user_id(telegram_data: TelegramUserID, current_user: User = Depends(get_current_user), db: Session = Depends(get_database)):
