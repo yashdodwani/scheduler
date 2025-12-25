@@ -21,10 +21,11 @@ else:
     allowed_origins = [
         "https://formskartscheduler.bolt.host",
         "https://new-chat-ulhd.bolt.host",
+        # Render frontend
+        "https://scheduler-formskart.onrender.com",
         # Optional: local dev
         "http://localhost",
         "http://localhost:5173",
-        "https://scheduler-formskart.onrender.com/",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
