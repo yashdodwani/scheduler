@@ -10,29 +10,22 @@ import os
 app = FastAPI(title="Schedule Management API", version="1.0.0")
 
 # CORS middleware
-<<<<<<< HEAD
 # Use explicit allowed origins when allow_credentials=True to ensure the
 # Access-Control-Allow-Origin header is included for browser requests.
+# You can override defaults via env var:
+#   CORS_ALLOW_ORIGINS="https://formskartscheduler.bolt.host,https://new-chat-ulhd.bolt.host"
 origins_env = os.getenv("CORS_ALLOW_ORIGINS", "")
-if origins_env:
+if origins_env.strip():
     allowed_origins = [o.strip() for o in origins_env.split(",") if o.strip()]
 else:
     allowed_origins = [
+        "https://formskartscheduler.bolt.host",
         "https://new-chat-ulhd.bolt.host",
+        # Optional: local dev
+        "http://localhost",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
-=======
-# NOTE: allow_credentials=True cannot be used with allow_origins=['*'] (browsers will block it).
-# Keep this list in sync with your deployed frontend origins.
-allowed_origins = [
-    "https://formskartscheduler.bolt.host",
-    # Optional: local dev
-    "http://localhost",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
->>>>>>> c15707a (added cors)
 
 app.add_middleware(
     CORSMiddleware,
