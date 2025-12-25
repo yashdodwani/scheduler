@@ -23,6 +23,7 @@ else:
         "https://new-chat-ulhd.bolt.host",
         # Optional: local dev
         "http://localhost",
+        "http://localhost:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ]
