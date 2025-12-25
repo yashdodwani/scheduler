@@ -52,8 +52,6 @@ class CompanyContact(Base):
     email = Column(String, nullable=True)
     telegram_user_id = Column(String, nullable=True)
 
-    created_at = Column(DateTime, default=datetime.utcnow)
-
     company = relationship("Company", back_populates="contacts")
 
 
