@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from models.db_models import User,Company
 from models.schemas import UserCreate, UserLogin, Token, TelegramUserID
